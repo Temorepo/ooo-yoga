@@ -42,8 +42,8 @@
       <arg value="-load-config"/>
       <arg value="${deploy.dir}/aslib-config.xml"/>
       <arg value="-compiler.optimize"/>
-      <arg value="-compiler.source-path=src/"/>
-      <arg value="-include-sources=src/"/>
+      <arg value="-compiler.source-path=src/as/"/>
+      <arg value="-include-sources=src/as/"/>
       <arg value="-output"/>
       <arg value="${deploy.dir}/${lib.name}.swc"/>
     </java>
