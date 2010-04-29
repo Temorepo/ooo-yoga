@@ -153,8 +153,7 @@ public class YogaBody extends Sprite
     /**
      * Switches to a new state, using a transition animation if possible.
      */
-    public function setState (state :String, immediate :Boolean = false,
-        transitionAllowed :Boolean = true) :void
+    public function setState (state :String, transitionAllowed :Boolean = true) :void
     {
         state = state.toLowerCase();
         var stateScene :MovieList = getMovie("state_" + state);
@@ -164,12 +163,12 @@ public class YogaBody extends Sprite
         }
 
         // transtion from our current state to the new state
-        var queuedTransition :Boolean =
-            transitionAllowed && queueTransitions(_state, state, immediate);
+        var queuedTransition :Boolean = transitionAllowed && queueTransitions(_state, state, true);
         // update our internal state variable
         _state = state;
-        // queue our new standing animation
-        queueMovie(stateScene, immediate && !queuedTransition);
+        // queue our new state animation, transitioning to it immediately if we didn't queue
+        // a transition
+        queueMovie(stateScene, !queuedTransition);
 
         // If we're not attached, update now so the animation media is attached
         if (this.stage == null) {
@@ -180,7 +179,7 @@ public class YogaBody extends Sprite
     /**
      * Triggers an action animation, using transition animations if possible.
      */
-    public function triggerAction (action :String, immediate :Boolean = false) :void
+    public function triggerAction (action :String, transitionAllowed :Boolean = true) :void
     {
         action = action.toLowerCase();
         var actionScene :MovieList = getMovie("action_" + action);
@@ -189,16 +188,14 @@ public class YogaBody extends Sprite
             return; // ignore it
         }
 
-        if (!immediate) {
-            // transition from our current state to the action
-            queueTransitions(_state, action);
-        }
+        // transition from our current state to the action
+        var queuedTransition :Boolean = transitionAllowed && queueTransitions(_state, action, true);
         // play the action animation
-        queueMovie(actionScene, immediate);
+        queueMovie(actionScene, !queuedTransition);
         // then transition back to our current state
-        queueTransitions(action, _state);
-        // and queue our standing animation
-        queueMovie(getMovie("state_" + _state));
+        queueTransitions(action, _state, false);
+        // and queue our current animation again
+        queueMovie(getMovie("state_" + _state), false);
 
         // If we're not attached, update now so the animation media is attached
         if (this.stage == null) {
@@ -389,8 +386,7 @@ public class YogaBody extends Sprite
      *
      * @return :Boolean If we queued a transition, return true.
      */
-    protected function queueTransitions (from :String, to :String, immediate :Boolean = false)
-        :Boolean
+    protected function queueTransitions (from :String, to :String, immediate :Boolean) :Boolean
     {
         // queue our transition animation (direct if we have one, through 'default' if we don't)
         var direct :MovieList = getMovie(from + "_to_" + to);
@@ -406,12 +402,12 @@ public class YogaBody extends Sprite
      * Queues a movie up to be played as soon as the other scenes in the queue have completed.
      * Handles queueing of null movies by ignoring the request to simplify other code.
      */
-    protected function queueMovie (movieList :MovieList, force :Boolean = false) :void
+    protected function queueMovie (movieList :MovieList, immediate :Boolean) :void
     {
         if (movieList == null) {
             return;
 
-        } else if (_playing == null || force) {
+        } else if (_playing == null || immediate) {
             _movieQueue.length = 0;
             _playing = movieList;
             _playing.update();
