@@ -245,7 +245,7 @@ public class YogaBody extends Sprite
     public function set1SkinAt (movieName :String, path :String,
         createDisplayObject :Function = null) :void
     {
-        for each (var movie :MovieClip in MovieList(_movies.get(movieName)).movies) {
+        for each (var movie :MovieClip in MovieList(_movies.get(movieName.toLowerCase())).movies) {
             setSkinAtInternal(movie, path, createDisplayObject);
         }
     }
@@ -255,7 +255,7 @@ public class YogaBody extends Sprite
      */
     public function remove1SkinAt (movieName :String, path :String) :void
     {
-        set1SkinAt(movieName, path, null);
+        set1SkinAt(movieName.toLowerCase(), path, null);
     }
 
     /**
@@ -307,7 +307,7 @@ public class YogaBody extends Sprite
      */
     public function set1FiltersAt (movieName :String, path :String, filters :Array = null) :void
     {
-        for each (var movie :MovieClip in MovieList(_movies.get(movieName)).movies) {
+        for each (var movie :MovieClip in MovieList(_movies.get(movieName.toLowerCase())).movies) {
             setFiltersAtInternal(movie, path, filters);
         }
     }
@@ -316,7 +316,7 @@ public class YogaBody extends Sprite
      * Returns the name of the currently playing movie, as it was registered in registerMovie()
      *
      * @param ignoreTransitions if true, and the Avatar is transitioning between movies,
-     * return the name of hte movie that will play when the transition is complete.
+     * return the name of the movie that will play when the transition is complete.
      */
     public function getCurrentMovieName (ignoreTransitions :Boolean = false) :String
     {
