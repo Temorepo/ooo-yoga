@@ -54,7 +54,7 @@ public class YogaBody extends Sprite
      */
     public function shutdown () :void
     {
-        _events.freeAllHandlers();
+        _events.shutdown();
         _events = null;
         _movies = null;
     }
