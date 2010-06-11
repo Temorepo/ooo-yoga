@@ -295,13 +295,13 @@
       <contributor>name</contributor>
       -->
       <!-- metadata.creator: A creator's name to store in the SWF metadata-->
-      <creator>Tim Conkling</creator>
+      <creator>Three Rings Design, Inc.</creator>
       <!-- metadata.date: The creation date to store in the SWF metadata-->
       <!-- metadata.date usage:
       <date>text</date>
       -->
       <!-- metadata.description: The default description to store in the SWF metadata-->
-      <description>http://code.google.com/p/flashbang/</description>
+      <description>http://code.google.com/p/ooo-yoga/</description>
       <!-- metadata.language: The language to store in the SWF metadata (i.e. EN, FR)-->
       <language>EN</language>
       <!-- metadata.localized-description: A localized RDF/XMP description to store in the SWF metadata-->

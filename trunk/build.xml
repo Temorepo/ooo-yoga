@@ -54,7 +54,7 @@
     <mkdir dir="${deploy.dir}/asdocs"/>
     <java classpath="${flexsdk.dir}/lib/asdoc.jar" classname="flex2.tools.ASDoc" fork="true">
       <jvmarg value="-Xmx1024m"/>
-      <jvmarg value="-Dsun.io.useCanonCashes=false"/>
+      <jvmarg value="-Dsun.io.useCanonCaches=false"/>
       <jvmarg value="-Xbootclasspath/p:${flexsdk.dir}/asdoc/lib/xalan.jar"/>
       <arg value="+flexlib=${flexsdk.dir}/frameworks"/>
       <arg line="-library-path ${flexsdk.dir}/frameworks/libs"/>
