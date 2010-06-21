@@ -204,6 +204,14 @@ public class YogaBody extends Sprite
     }
 
     /**
+     * Returns the body's current state.
+     */
+    public function get state () :String
+    {
+        return _state;
+    }
+
+    /**
      * Returns true if we're currently transitioning between states.
      */
     public function inTransition () :Boolean
