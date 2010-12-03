@@ -4,7 +4,7 @@
   <groupId>com.threerings</groupId>
   <artifactId>yogalib</artifactId>
   <packaging>swc</packaging>
-  <version>1.0</version>
+  <version>1.1-SNAPSHOT</version>
   <name>yogalib</name>
   <description>Utilities for use in developing ActionScript applications.</description>
   <url>http://code.google.com/p/ooo-yoga/</url>
