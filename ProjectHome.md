@@ -1,0 +1,1 @@
+Simple Flash classes for avatar manipulation. From Three Rings.
